@@ -1,6 +1,6 @@
 <img width="1" height="1" alt="image" src="https://github.com/user-attachments/assets/d1fa18b7-1fcf-48a2-a98f-79a076fa3d8a" />🚚 Door-to-Door Courier System – Documentation
 
-📌 Project Overview
+📌 Project Overview:
 
 The Door-to-Door Courier System is a web-based application designed to automate and manage courier and delivery services efficiently.
 
@@ -9,7 +9,7 @@ In today’s digital world, courier services play a vital role in supporting e-c
 This project provides a centralized and automated platform that simplifies parcel booking, tracking, and delivery management.
 
 
-🎯 Objectives
+🎯 Objectives:
 
    To automate the courier booking process
 
@@ -22,7 +22,7 @@ This project provides a centralized and automated platform that simplifies parce
    To improve customer satisfaction
 
 
-👥 Users of the System
+👥 Users of the System:
 
 1.Admin
 
@@ -32,13 +32,13 @@ This project provides a centralized and automated platform that simplifies parce
 
   Update parcel status
 
-  Delivery Agent
+2.Delivery Agent
 
   View assigned deliveries
 
   Update delivery status
 
-  Customer
+3.Customer
 
   Book a courier
 
@@ -47,7 +47,7 @@ This project provides a centralized and automated platform that simplifies parce
   View booking history
   
 
-🛠️ Technologies Used
+🛠️ Technologies Used:
 
     Frontend: HTML, CSS, JavaScript
 
@@ -58,7 +58,7 @@ This project provides a centralized and automated platform that simplifies parce
     Server: XAMPP / Localhost
     
 
-⚙️ System Features
+⚙️ System Features:
 
   User Registration and Login
 
@@ -71,8 +71,9 @@ This project provides a centralized and automated platform that simplifies parce
   Delivery Status Update
 
   Secure Database Management
+  
 
-💻 How to Run the Project
+💻 How to Run the Project:
 
   Install XAMPP on your system
 
@@ -87,7 +88,7 @@ This project provides a centralized and automated platform that simplifies parce
     http://localhost/project-folder-name
 
     
-📈 Future Enhancements
+📈 Future Enhancements:
 
   Online payment integration
 
@@ -98,6 +99,6 @@ This project provides a centralized and automated platform that simplifies parce
   Mobile application support
 
 
-📚 Conclusion
+📚 Conclusion:
 
 The Door-to-Door Courier System improves delivery management by providing a user-friendly and automated platform. It reduces manual workload, increases efficiency, and ensures better customer service.
