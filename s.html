@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DoorToDoor Courier - Reliable & Fast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* --- CSS VARIABLES --- */
+:root{
+  --bg: #f8fafc;
+  --bg-pattern: radial-gradient(circle at 1px 1px, rgba(148,163,184,0.1) 1px, transparent 0);
+  --card-bg: #ffffff;
+  --muted: #64748b;
+  --text: #0f172a;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-soft: rgba(37, 99, 235, 0.08);
+  --accent-2: #06b6d4;
+  --border: #e2e8f0;
+  --danger: #ef4444;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --glass: rgba(255,255,255,0.8);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --radius: 12px;
+  --nav-height: 72px;
+  --transition-fast: 150ms ease;
+  --transition-norm: 250ms ease;
+  --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.dark{
+  --bg: #0f172a;
+  --bg-pattern: radial-gradient(circle at 1px 1px, rgba(51, 65, 85, 0.4) 1px, transparent 0);
+  --card-bg: #1e293b;
+  --muted: #94a3b8;
+  --text: #f1f5f9;
+  --accent: #38bdf8;
+  --accent-hover: #0ea5e9;
+  --accent-soft: rgba(56, 189, 248, 0.1);
+  --accent-2: #818cf8;
+  --border: #334155;
+  --danger: #fb7185;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --glass: rgba(15, 23, 42, 0.85);
+  --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg);
+  background-image: var(--bg-pattern);
+  background-size: 24px 24px;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color var(--transition-norm), color var(--transition-norm);
+  overflow-x: hidden;
+  padding-top: var(--nav-height);
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4 { margin: 0 0 0.5em 0; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: var(--text); }
+h1 { font-size: clamp(2rem, 5vw, 3rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 1.875rem); }
+h3 { font-size: 1.125rem; }
+p { margin: 0 0 1em 0; color: var(--muted); }
+
+.input-group { margin-bottom: 1rem; }
+.input-group label { display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--text); }
+
+input, textarea, select, button {
+  font-family: inherit;
+  color: var(--text);
+  background: var(--card-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  outline: none;
+  transition: all var(--transition-fast);
+  width: 100%;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: var(--shadow-sm), 0 4px 12px rgba(37, 99, 235, 0.2);
+  transition: transform var(--transition-fast), box-shadow var(--transition-norm);
+  width: auto;
+}
+button:hover { transform: translateY(-1px); box-shadow: var(--shadow), 0 8px 16px rgba(37, 99, 235, 0.25); }
+button:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+button.ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+button.ghost:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+button.smallBtn { padding: 0.5rem 0.875rem; font-size: 0.8125rem; }
+button.danger { background: var(--danger); box-shadow: var(--shadow-sm); }
+button.success { background: var(--success); box-shadow: var(--shadow-sm); }
+
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-height);
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+.logo { 
+  font-weight: 800; 
+  font-size: 1.25rem; 
+  color: var(--text); 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+  text-decoration: none;
+}
+.logo svg { height: 36px; width: auto; }
+.logo span { background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.nav-links { display: flex; gap: 1.5rem; align-items: center; }
+.nav-link { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 0.9375rem; transition: color var(--transition-fast); cursor: pointer; padding: 0.5rem; border-radius: 6px; }
+.nav-link:hover { color: var(--text); background: var(--accent-soft); }
+.nav-link.active { color: var(--accent); font-weight: 600; }
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+.flex { display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-start; }
+.flex-col { flex-direction: column; }
+.flex-center { align-items: center; justify-content: center; }
+.flex-between { justify-content: space-between; }
+.flex-1 { flex: 1 1 300px; }
+.hidden { display: none !important; }
+.mt-4 { margin-top: 1rem; }
+.text-center { text-align: center; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fadeUp 0.6s var(--transition-slow) forwards; }
+.delay-1 { animation-delay: 0.1s; opacity: 0; }
+.delay-2 { animation-delay: 0.2s; opacity: 0; }
+.delay-3 { animation-delay: 0.3s; opacity: 0; }
+
+.hero { padding: 5rem 0 3rem; text-align: center; position: relative; }
+.hero-content { max-width: 720px; margin: 0 auto; }
+.hero h1 { margin-bottom: 1rem; }
+.hero p { font-size: 1.125rem; margin-bottom: 2rem; }
+.hero-btns { display: flex; gap: 1rem; justify-content: center; }
+
+.track-hero-card {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  max-width: 600px;
+  margin: 3rem auto 0;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+.track-hero-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+.track-input-group { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+.track-input-group input { flex: 1; }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+.feature-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  transition: all var(--transition-norm);
+}
+.feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--accent); }
+.feature-icon { 
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 12px;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  margin-bottom: 1rem;
+}
+
+/* --- ADMIN OVERVIEW STYLES --- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.stat-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: box-shadow var(--transition-norm);
+}
+.stat-card:hover { box-shadow: var(--shadow); }
+.stat-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+.stat-icon.blue { background: rgba(37, 99, 235, 0.1); color: var(--accent); }
+.stat-icon.green { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+.stat-icon.yellow { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+.stat-icon.purple { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+.stat-info h4 { font-size: 0.875rem; color: var(--muted); margin: 0 0 4px 0; font-weight: 500; }
+.stat-info p { font-size: 1.5rem; font-weight: 700; color: var(--text); margin: 0; }
+
+/* --- ADMIN FILTER BAR --- */
+.filter-bar {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.filter-bar input, .filter-bar select {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  height: 38px;
+  padding: 0 0.75rem;
+  font-size: 0.8125rem;
+  margin: 0;
+}
+.filter-bar .search-input { flex: 2; min-width: 200px; }
+.filter-bar .filter-select { flex: 1; min-width: 120px; }
+
+/* --- ADMIN DETAIL VIEW STYLES --- */
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+.detail-item {
+  background: var(--bg);
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+.detail-item strong {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.detail-item span { color: var(--text); font-weight: 500; }
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-right: 4px;
+}
+.badge.fragile { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+.badge.express { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+
+.table-wrap { width: 100%; overflow-x: auto; margin-top: 1rem; border-radius: 8px; border: 1px solid var(--border); }
+.table { width: 100%; border-collapse: collapse; font-size: 0.875rem; min-width: 600px; }
+.table th, .table td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.875rem 1rem;
+  text-align: left;
+  background: var(--card-bg);
+}
+.table th {
+  background: var(--bg);
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+.table tr:last-child td { border-bottom: none; }
+.table tr:hover td { background: var(--accent-soft); }
+
+@media (max-width: 640px) {
+  .table-wrap { border: none; background: transparent; }
+  .table { min-width: 0; border: none; background: transparent; }
+  .table thead { display: none; }
+  .table tbody { display: block; }
+  .table tr { 
+    display: block; 
+    background: var(--card-bg); 
+    border: 1px solid var(--border); 
+    margin-bottom: 1rem; 
+    border-radius: var(--radius); 
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .table td { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0.5rem 0; 
+    border-bottom: 1px solid var(--border); 
+    background: transparent;
+  }
+  .table td:last-child { border-bottom: none; margin-top: 0.5rem; padding-top: 1rem; justify-content: flex-end; }
+  .table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text);
+    margin-right: 1rem;
+  }
+  .table td:last-child::before { display: none; }
+  .detail-grid { grid-template-columns: 1fr; }
+  .filter-bar { padding: 0.75rem; }
+  .filter-bar input, .filter-bar select { min-width: 100%; }
+}
+
+.status-pill {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.status-Pending { background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.2); }
+.status-Picked\ Up { background: rgba(245, 158, 11, 0.1); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.2); }
+.status-In\ Transit { background: rgba(37, 99, 235, 0.1); color: var(--accent); border: 1px solid rgba(37, 99, 235, 0.2); }
+.status-Out\ for\ Delivery { background: rgba(6, 182, 212, 0.1); color: var(--accent-2); border: 1px solid rgba(6, 182, 212, 0.2); }
+.status-Delivered { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); }
+
+.actionBtn { padding: 0.375rem 0.75rem; font-size: 0.75rem; border-radius: 6px; color: white; border: none; cursor: pointer; margin-left: 0.25rem; }
+.trackBtn { background: var(--accent-2); }
+
+.admin-fab-wrap { position: fixed; right: 24px; bottom: 24px; z-index: 900; display: flex; align-items: flex-end; }
+#adminFab { width: 56px; height: 56px; border-radius: 16px; font-size: 1.5rem; box-shadow: var(--shadow-lg); }
+#adminPanel { 
+  width: 0; overflow: hidden; 
+  background: var(--card-bg); 
+  border-radius: 16px; 
+  box-shadow: var(--shadow-lg); 
+  margin-right: 1rem; 
+  transition: width var(--transition-slow); 
+  display: flex; flex-direction: column; 
+  border: 1px solid var(--border);
+}
+#adminPanel.open { width: 260px; padding: 1rem; }
+#adminPanel button { margin-bottom: 0.5rem; text-align: left; background: transparent; color: var(--text); box-shadow: none; border: 1px solid var(--border); border-radius: 8px; }
+#adminPanel button:hover { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+
+#toast-container { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 2000; display: flex; flex-direction: column; gap: 0.5rem; width: 90%; max-width: 400px; pointer-events: none; }
+.toast {
+  width: 100%;
+  padding: 1rem;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: slideUp 0.4s var(--transition-slow) forwards;
+  border: 1px solid var(--border);
+  pointer-events: all;
+}
+.toast.success { border-left: 4px solid var(--success); }
+.toast.error { border-left: 4px solid var(--danger); }
+.toast .close-toast { background: none; border: none; cursor: pointer; opacity: 0.5; padding: 0.5rem; color: inherit; }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 768px) {
+  .navbar { padding: 0 1rem; }
+  .nav-links span:not(.user-info):not(:last-child) { display: none; }
+  .hero { padding: 3rem 0; }
+  .track-input-group { flex-direction: column; }
+  .track-input-group button { width: 100%; }
+  .admin-fab-wrap { bottom: 1rem; right: 1rem; }
+  #adminPanel.open { position: fixed; bottom: 80px; right: 16px; width: calc(100% - 32px); max-width: 300px; }
+}
+</style>
+</head>
+<body>
+
+<div id="toast-container"></div>
+
+<nav class="navbar">
+  <a href="#" onclick="showHome()" class="logo">
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="40" height="40" rx="8" fill="url(#grad1)"/>
+      <path d="M12 12H28C29.1 12 30 12.9 30 14V26C30 27.1 29.1 28 28 28H12C10.9 28 10 27.1 10 26V14C10 12.9 10.9 12 12 12Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M30 14L20 21L10 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <defs>
+        <linearGradient id="grad1" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#2563EB"/>
+          <stop offset="1" stop-color="#06B6D4"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span>DoorToDoor</span>
+  </a>
+  <div class="nav-links">
+    <a href="#" onclick="showHome()" class="nav-link" id="navHome">Home</a>
+    <a href="#" onclick="scrollToTrack()" class="nav-link">Track</a>
+    <span id="authLinks">
+      <a href="#" onclick="showLogin()" class="nav-link">Login</a>
+      <a href="#" onclick="showRegister()" class="ghost smallBtn">Sign Up</a>
+    </span>
+    <span id="userLinks" class="hidden" style="display:flex; gap:12px; align-items:center;">
+      <span id="navUsername" class="user-info" style="font-weight:600; font-size:0.875rem; color:var(--text);">User</span>
+      <button onclick="logout()" class="danger smallBtn">Logout</button>
+    </span>
+    <button id="themeToggle" class="ghost smallBtn" aria-label="Toggle Theme" style="border:none; padding:8px; margin-left:8px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted)">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div id="homePage">
+  <section class="hero container">
+    <div class="hero-content animate-fade-up">
+      <h1>Deliver with Confidence</h1>
+      <p>Fast, secure, and transparent courier services. Track your shipments in real-time from pickup to doorstep.</p>
+      <div class="hero-btns">
+        <button onclick="showRegister()" style="padding: 12px 24px;">Send a Package</button>
+        <button onclick="scrollToTrack()" class="ghost" style="padding: 12px 24px;">Track Shipment</button>
+      </div>
+    </div>
+
+    <div class="track-hero-card animate-fade-up delay-1" id="homeTrackSection">
+      <h3>Quick Track</h3>
+      <p style="margin-bottom:0; font-size:0.875rem;">Enter your 8-digit tracking code</p>
+      <div class="track-input-group">
+        <input type="text" id="publicTrackCode" placeholder="e.g. SEAB-1234" style="font-family: monospace; letter-spacing: 0.5px;">
+        <button onclick="publicTrack()">Track</button>
+      </div>
+      
+      <div id="publicTrackResult" class="hidden" style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+        <div class="flex flex-between" style="margin-bottom:1rem;">
+          <strong style="color:var(--text)">Status</strong>
+          <span id="pStatus" class="status-pill"></span>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; font-size:0.875rem;">
+          <div>
+            <small style="color:var(--muted); display:block; margin-bottom:4px;">From</small>
+            <span id="pFrom" style="font-weight:500"></span>
+          </div>
+          <div>
+            <small style="color:var(--muted); display:block; margin-bottom:4px;">To</small>
+            <span id="pTo" style="font-weight:500"></span>
+          </div>
+          <div>
+            <small style="color:var(--muted); display:block; margin-bottom:4px;">Sender</small>
+            <span id="pSender"></span>
+          </div>
+          <div>
+            <small style="color:var(--muted); display:block; margin-bottom:4px;">ETA</small>
+            <span id="pEta"></span>
+          </div>
+        </div>
+        <div style="text-align:right; margin-top:1rem;">
+           <button class="smallBtn ghost" onclick="document.getElementById('publicTrackResult').classList.add('hidden')">Close</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" style="padding-bottom:60px;">
+    <div class="features-grid">
+      <div class="feature-card animate-fade-up delay-1">
+        <div class="feature-icon">🚀</div>
+        <h3>Express Speed</h3>
+        <p style="margin:0">Same-day delivery options available for urgent packages within the city.</p>
+      </div>
+      <div class="feature-card animate-fade-up delay-2">
+        <div class="feature-icon">📍</div>
+        <h3>Live Tracking</h3>
+        <p style="margin:0">Monitor your parcel's journey with GPS-enabled real-time updates.</p>
+      </div>
+      <div class="feature-card animate-fade-up delay-3">
+        <div class="feature-icon">🛡️</div>
+        <h3>Secure Handling</h3>
+        <p style="margin:0">Insured coverage and careful handling for fragile or valuable items.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- AUTH CONTAINER -->
+<div id="authContainer" class="container hidden">
+  <div class="card" style="max-width: 400px; margin: 2rem auto;">
+    <div id="loginForm">
+      <h2 class="text-center">Welcome Back</h2>
+      <p class="text-center" style="margin-bottom:1.5rem;">Login to manage your shipments</p>
+      <div class="input-group">
+        <input type="email" id="loginEmail" placeholder="Email Address" required>
+      </div>
+      <div class="input-group">
+        <input type="password" id="loginPassword" placeholder="Password">
+      </div>
+      <button onclick="login()" style="width:100%; margin-bottom:1rem;">Login</button>
+      <div class="text-center" style="font-size:0.8125rem;">
+        <a href="#" onclick="showReset();return false" style="color:var(--muted); text-decoration:none;">Forgot password?</a>
+        <div style="margin-top:0.5rem; color:var(--muted);">
+          No account? <a href="#" onclick="showRegister();return false" style="color:var(--accent); font-weight:600;">Sign up</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="registerForm" class="hidden">
+      <h2 class="text-center">Create Account</h2>
+      <div class="input-group"><input type="email" id="registerEmail" placeholder="Email Address" required></div>
+      <div class="input-group"><input type="password" id="registerPassword" placeholder="Password"></div>
+      <div class="input-group"><input type="text" id="registerFullName" placeholder="Full Name"></div>
+      <div class="input-group"><input type="text" id="registerMobile" placeholder="Mobile Number"></div>
+      <button onclick="register()" style="width:100%;">Register</button>
+      <div class="text-center" style="margin-top:1rem; font-size:0.8125rem;">
+        Already have an account? <a href="#" onclick="showLogin();return false" style="color:var(--accent); font-weight:600;">Login</a>
+      </div>
+    </div>
+
+    <div id="resetForm" class="hidden">
+      <h2 class="text-center">Reset Password</h2>
+      <div class="input-group"><input type="email" id="resetEmail" placeholder="Email Address"></div>
+      <div class="input-group"><input type="password" id="resetNewPassword" placeholder="New Password"></div>
+      <button onclick="resetPassword()" style="width:100%;">Reset</button>
+      <div class="text-center" style="margin-top:1rem; font-size:0.8125rem;">
+        <a href="#" onclick="showLogin();return false" style="color:var(--accent);">Back to Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- USER DASHBOARD -->
+<div id="userDashboard" class="container hidden">
+  <div class="flex flex-between" style="margin-bottom:1.5rem;">
+    <h2>Dashboard</h2>
+    <div class="flex" style="gap:0.5rem;">
+      <button onclick="showUserSection('bookingSec')" class="ghost smallBtn" id="btnBooking">Book</button>
+      <button onclick="showUserSection('ordersSec')" class="ghost smallBtn" id="btnOrders">Orders</button>
+      <button onclick="showUserSection('profileSec')" class="ghost smallBtn" id="btnProfile">Profile</button>
+    </div>
+  </div>
+
+  <div id="bookingSec">
+    <form id="courierForm" onsubmit="event.preventDefault(); submitCourierForm();">
+      <div class="card">
+        <h3>Sender Details</h3>
+        <div class="flex">
+          <input type="text" id="senderName" placeholder="Name" required>
+          <input type="text" id="senderMobile" placeholder="Mobile (10 digits)" pattern="[0-9]{10}" required>
+        </div>
+        <textarea id="fromAddress" rows="2" placeholder="Pickup Address" required style="margin-top:0.5rem;"></textarea>
+      </div>
+      <div class="card">
+        <h3>Receiver Details</h3>
+        <div class="flex">
+          <input type="text" id="receiverName" placeholder="Name" required>
+          <input type="text" id="receiverMobile" placeholder="Mobile (10 digits)" pattern="[0-9]{10}" required>
+        </div>
+        <textarea id="toAddress" rows="2" placeholder="Delivery Address" required style="margin-top:0.5rem;"></textarea>
+      </div>
+      <div class="card">
+        <h3>Shipment Info</h3>
+        <div class="flex">
+          <!-- Updated Weight Input: Max 20kg -->
+          <input type="number" id="weight" step="0.1" min="0.1" max="20" placeholder="Max 20kg" required>
+          <select id="category" required>
+            <option value="">Category</option>
+            <option value="Documents">Documents</option>
+            <option value="Parcel">Parcel</option>
+            <option value="Heavy Goods">Heavy Goods</option>
+          </select>
+        </div>
+        <div class="flex" style="margin-top:1rem; gap:1.5rem;">
+          <label style="display:flex; align-items:center; font-size:0.875rem; cursor:pointer; color:var(--muted);">
+            <input type="checkbox" id="fragileChk" style="width:auto; margin-right:8px;"> Fragile (+₹50)
+          </label>
+          <label style="display:flex; align-items:center; font-size:0.875rem; cursor:pointer; color:var(--muted);">
+            <input type="checkbox" id="expressChk" style="width:auto; margin-right:8px;"> Express (+₹100)
+          </label>
+        </div>
+        <div class="flex" style="margin-top:1rem;">
+          <input type="text" id="payment" placeholder="Cost" readonly style="background:var(--bg); font-weight:700;">
+          <input type="text" id="etaField" placeholder="ETA" readonly style="background:var(--bg); width: 120px;">
+        </div>
+        <div style="margin-top:1rem;">
+          <select id="paymentMethod" required>
+            <option value="">Payment Method</option>
+            <option value="UPI">UPI</option>
+            <option value="Banking">Banking</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="Cash on Delivery">COD</option>
+          </select>
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <button type="submit">Proceed</button>
+      </div>
+    </form>
+
+    <div id="paymentSection" class="card hidden" style="border-color:var(--accent);">
+      <h3>Complete Payment</h3>
+      <p>Amount: <strong id="amountText" style="color:var(--accent)"></strong></p>
+      <input type="text" id="paymentInput" placeholder="Enter UPI ID / Card Details">
+      <div style="margin-top:0.75rem; text-align:right;">
+        <button onclick="completePayment()">Pay Now</button>
+      </div>
+    </div>
+    <div id="courierCode" style="text-align:center; margin-top:1rem; font-weight:700; color:var(--success); font-size:1.125rem;"></div>
+  </div>
+
+  <div id="ordersSec" class="hidden">
+    <div class="card" style="padding:0; overflow:hidden;">
+      <div style="padding:1.5rem 1.5rem 0;">
+        <h3 style="margin-bottom:0;">My Orders</h3>
+      </div>
+      <div class="table-wrap" style="border:none; margin-top:0;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Receiver</th>
+              <th>To</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="userOrdersBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="profileSec" class="hidden">
+    <div class="card">
+      <h3>Profile Settings</h3>
+      <div class="flex">
+        <div class="flex-1" style="border-right:1px solid var(--border); padding-right:1.5rem;">
+          <p style="font-size:0.875rem;"><strong>Email:</strong> <span id="profileEmail"></span></p>
+          <p style="font-size:0.875rem;"><strong>Name:</strong> <span id="profileFullName"></span></p>
+          <p style="font-size:0.875rem;"><strong>Mobile:</strong> <span id="profileMobile"></span></p>
+          <p style="font-size:0.875rem;"><strong>Joined:</strong> <span id="profileDate"></span></p>
+        </div>
+        <div class="flex-1" style="padding-left:1.5rem;">
+          <input type="text" id="editFullName" placeholder="Update Name" style="margin-bottom:0.5rem;">
+          <input type="text" id="editMobile" placeholder="Update Mobile" style="margin-bottom:0.5rem;">
+          <input type="password" id="editPassword" placeholder="New Password">
+          <button onclick="updateProfile()" class="smallBtn mt-4">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="adminDashboard" class="container hidden">
+  <h2 style="margin-bottom:1.5rem;">Admin Panel</h2>
+  
+  <div class="admin-fab-wrap" id="adminFabWrap">
+    <div id="adminPanel">
+      <h4 style="margin:0.5rem 0 1rem; font-size:0.875rem; color:var(--muted);">Admin Tools</h4>
+      <button onclick="adminShowSection('overview')">📊 Overview</button>
+      <button onclick="adminShowSection('all')">📦 All Shipments</button>
+      <button onclick="adminShowSection('standard')">🚚 Standard Active</button>
+      <button onclick="adminShowSection('express')">⚡ Express Active</button>
+      <button onclick="adminShowSection('delivered')">✅ Delivered</button>
+      <button onclick="adminShowSection('users')">👥 Manage Users</button>
+      <div style="margin-top:1rem; border-top:1px solid var(--border); padding-top:1rem;">
+         <input id="adminTrackInput" placeholder="Search Code..." style="padding:0.5rem; font-size:0.8125rem; margin-bottom:0.5rem;">
+         <button onclick="adminTrackLookup()" class="smallBtn" style="width:100%;">Search</button>
+      </div>
+    </div>
+    <button id="adminFab" aria-label="Admin Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+    </button>
+  </div>
+
+  <!-- Overview Section -->
+  <div id="adminOverviewSec">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon blue">📦</div>
+        <div class="stat-info">
+          <h4>Total Shipments</h4>
+          <p id="statTotalOrders">0</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon yellow">⏳</div>
+        <div class="stat-info">
+          <h4>Pending Orders</h4>
+          <p id="statPending">0</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">₹</div>
+        <div class="stat-info">
+          <h4>Total Revenue</h4>
+          <p id="statRevenue">₹0</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon purple">👥</div>
+        <div class="stat-info">
+          <h4>Total Users</h4>
+          <p id="statUsers">0</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Recent Shipments</h3>
+      <div class="table-wrap" style="border:none; margin:0;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>User</th>
+              <th>Route</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="recentOrdersTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- All Shipments Section with Filters -->
+  <div id="adminAllSec" class="hidden">
+    <div class="card" style="padding:0; overflow:hidden;">
+      <div class="flex flex-between" style="padding:1rem 1.5rem; border-bottom:1px solid var(--border);">
+        <h3 style="margin:0;">📦 All Shipments</h3>
+      </div>
+      <div class="filter-bar">
+        <input type="text" id="filterSearch" class="search-input" placeholder="Search Code, Sender, Receiver..." oninput="loadAllShipments()">
+        <select id="filterStatus" class="filter-select" onchange="loadAllShipments()">
+          <option value="ALL">All Status</option>
+          <option value="Pending">Pending</option>
+          <option value="Picked Up">Picked Up</option>
+          <option value="In Transit">In Transit</option>
+          <option value="Out for Delivery">Out for Delivery</option>
+          <option value="Delivered">Delivered</option>
+        </select>
+        <select id="filterType" class="filter-select" onchange="loadAllShipments()">
+          <option value="ALL">All Types</option>
+          <option value="Express">Express</option>
+          <option value="Standard">Standard</option>
+        </select>
+      </div>
+      <div class="table-wrap" style="border:none; margin:0;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Type</th>
+              <th>Sender</th>
+              <th>Route</th>
+              <th>Status</th>
+              <th>Manage</th>
+            </tr>
+          </thead>
+          <tbody id="allShipmentsTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Standard Delivery Section -->
+  <div id="adminStandardSec" class="hidden">
+    <div class="card" style="padding:0; overflow:hidden;">
+      <div class="flex flex-between" style="padding:1rem 1.5rem; border-bottom:1px solid var(--border);">
+        <h3 style="margin:0;">🚚 Standard Delivery</h3>
+        <span class="badge" style="background:var(--accent-soft); color:var(--accent); font-size:1rem; padding:4px 12px;">Active</span>
+      </div>
+      <div class="table-wrap" style="border:none; margin:0;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Sender</th>
+              <th>Route</th>
+              <th>Status</th>
+              <th>Manage</th>
+            </tr>
+          </thead>
+          <tbody id="standardTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Express Delivery Section -->
+  <div id="adminExpressSec" class="hidden">
+    <div class="card" style="padding:0; overflow:hidden; border: 1px solid var(--warning);">
+      <div class="flex flex-between" style="padding:1rem 1.5rem; border-bottom:1px solid var(--border); background:rgba(245, 158, 11, 0.05);">
+        <h3 style="margin:0;">⚡ Express Delivery</h3>
+        <span class="badge express" style="font-size:1rem; padding:4px 12px;">High Priority</span>
+      </div>
+      <div class="table-wrap" style="border:none; margin:0;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Sender</th>
+              <th>Route</th>
+              <th>Status</th>
+              <th>Manage</th>
+            </tr>
+          </thead>
+          <tbody id="expressTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delivered Section -->
+  <div id="adminDeliveredSec" class="hidden">
+    <div class="card" style="padding:0; overflow:hidden; border: 1px solid var(--success);">
+      <div class="flex flex-between" style="padding:1rem 1.5rem; border-bottom:1px solid var(--border); background:rgba(16, 185, 129, 0.05);">
+        <h3 style="margin:0;">✅ Delivered Shipments</h3>
+        <span class="badge" style="background:rgba(16, 185, 129, 0.1); color:var(--success); font-size:1rem; padding:4px 12px;">Completed</span>
+      </div>
+      <div class="table-wrap" style="border:none; margin:0;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Sender</th>
+              <th>Route</th>
+              <th>Details</th>
+              <th>Manage</th>
+            </tr>
+          </thead>
+          <tbody id="deliveredTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="adminUsersSec" class="hidden">
+    <div class="card" style="padding:0; overflow:hidden;">
+       <div style="padding:1.5rem 1.5rem 0;"><h3>Users</h3></div>
+       <div class="table-wrap" style="border:none; margin:0;">
+        <table class="table">
+          <thead><tr><th>Email</th><th>Name</th><th>Mobile</th><th>Joined</th></tr></thead>
+          <tbody id="usersTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN DETAIL VIEW -->
+  <div id="adminTrackResult" class="card hidden" style="margin-top:1.5rem;">
+    <div class="flex flex-between" style="margin-bottom:1rem;">
+        <h3 style="margin:0;">Shipment Details</h3>
+        <span id="aStatus" class="status-pill"></span>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-item">
+        <strong>Tracking Code</strong>
+        <span id="aCode"></span>
+      </div>
+      <div class="detail-item">
+        <strong>Booked By</strong>
+        <span id="aUser"></span>
+      </div>
+      
+      <div class="detail-item">
+        <strong>Sender Name</strong>
+        <span id="aSenderName"></span>
+      </div>
+      <div class="detail-item">
+        <strong>Sender Mobile</strong>
+        <span id="aSenderMobile"></span>
+      </div>
+      <div class="detail-item" style="grid-column: span 2;">
+        <strong>Pickup Address</strong>
+        <span id="aFrom"></span>
+      </div>
+
+      <div class="detail-item">
+        <strong>Receiver Name</strong>
+        <span id="aReceiverName"></span>
+      </div>
+      <div class="detail-item">
+        <strong>Receiver Mobile</strong>
+        <span id="aReceiverMobile"></span>
+      </div>
+      <div class="detail-item" style="grid-column: span 2;">
+        <strong>Delivery Address</strong>
+        <span id="aTo"></span>
+      </div>
+
+      <div class="detail-item">
+        <strong>Weight</strong>
+        <span id="aWeight"></span>
+      </div>
+      <div class="detail-item">
+        <strong>Category</strong>
+        <span id="aCategory"></span>
+      </div>
+      <div class="detail-item">
+        <strong>Estimated Delivery</strong>
+        <span id="aEta"></span>
+      </div>
+      <div class="detail-item">
+        <strong>Payment</strong>
+        <span id="aPayment"></span>
+      </div>
+       <div class="detail-item" style="grid-column: span 2;">
+        <strong>Options</strong>
+        <span id="aOptions"></span>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem; background:var(--bg); padding:1rem; border-radius:8px;">
+      <label style="font-size:0.875rem; font-weight:600; display:block; margin-bottom:0.5rem;">Update Status</label>
+      <div class="flex" style="gap:0.5rem;">
+        <select id="adminUpdateStatusSelect" style="margin-bottom:0; flex:1;">
+          <option value="Pending">Pending</option>
+          <option value="Picked Up">Picked Up</option>
+          <option value="In Transit">In Transit</option>
+          <option value="Out for Delivery">Out for Delivery</option>
+          <option value="Delivered">Delivered</option>
+        </select>
+        <button onclick="adminUpdateStatus()" class="smallBtn" style="margin:0;">Save Status</button>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem; text-align:right;">
+      <button class="ghost smallBtn" onclick="document.getElementById('adminTrackResult').classList.add('hidden')">Close Details</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* --- STATE & INITIALIZATION --- */
+const admin = {email:'admin@door.com', password:'admin123'};
+let currentUser = null;
+let selectedCourierCode = null;
+let courierData = {};
+
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  showHome();
+  setupEventListeners();
+});
+
+function setupEventListeners() {
+  ['weight','category','fragileChk','expressChk'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('input', calculatePriceAndEta);
+  });
+
+  const adminFab = document.getElementById('adminFab');
+  const adminPanel = document.getElementById('adminPanel');
+  if(adminFab) adminFab.addEventListener('click', (e) => {
+    e.stopPropagation();
+    adminPanel.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.admin-fab-wrap')) {
+      if(adminPanel) adminPanel.classList.remove('open');
+    }
+  });
+}
+
+/* --- NAVIGATION --- */
+function showHome() {
+  hideAllSections();
+  document.getElementById('homePage').classList.remove('hidden');
+  document.getElementById('authLinks').classList.remove('hidden');
+  document.getElementById('userLinks').classList.add('hidden');
+  document.getElementById('adminFabWrap').classList.add('hidden');
+}
+
+function scrollToTrack() {
+  if(document.getElementById('homePage').classList.contains('hidden')) {
+    showHome();
+    setTimeout(() => {
+      document.getElementById('homeTrackSection').scrollIntoView({behavior: 'smooth'});
+      document.getElementById('publicTrackCode').focus();
+    }, 100);
+  } else {
+    document.getElementById('homeTrackSection').scrollIntoView({behavior: 'smooth'});
+    document.getElementById('publicTrackCode').focus();
+  }
+}
+
+function showLogin() {
+  hideAllSections();
+  document.getElementById('authContainer').classList.remove('hidden');
+  document.getElementById('loginForm').classList.remove('hidden');
+  document.getElementById('registerForm').classList.add('hidden');
+  document.getElementById('resetForm').classList.add('hidden');
+}
+
+function showRegister() {
+  hideAllSections();
+  document.getElementById('authContainer').classList.remove('hidden');
+  document.getElementById('loginForm').classList.add('hidden');
+  document.getElementById('registerForm').classList.remove('hidden');
+  document.getElementById('resetForm').classList.add('hidden');
+}
+
+function showReset() {
+  document.getElementById('loginForm').classList.add('hidden');
+  document.getElementById('resetForm').classList.remove('hidden');
+}
+
+function hideAllSections() {
+  document.getElementById('homePage').classList.add('hidden');
+  document.getElementById('authContainer').classList.add('hidden');
+  document.getElementById('userDashboard').classList.add('hidden');
+  document.getElementById('adminDashboard').classList.add('hidden');
+}
+
+/* --- AUTHENTICATION --- */
+function login() {
+  const e = document.getElementById('loginEmail').value.trim();
+  const p = document.getElementById('loginPassword').value.trim();
+
+  if (e === admin.email && p === admin.password) {
+    currentUser = 'admin';
+    enterAdminDashboard();
+    return;
+  }
+
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const user = users.find(user => user.email === e && user.password === p);
+
+  if (user) {
+    currentUser = user.email;
+    enterUserDashboard(user);
+  } else {
+    showToast('Invalid credentials', 'error');
+  }
+}
+
+function register() {
+  const e = document.getElementById('registerEmail').value.trim();
+  const p = document.getElementById('registerPassword').value.trim();
+  const n = document.getElementById('registerFullName').value.trim();
+  const m = document.getElementById('registerMobile').value.trim();
+
+  if (!e || !p) return showToast('Email and password required', 'error');
+
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  if (users.find(user => user.email === e)) return showToast('Email already exists', 'error');
+
+  users.push({ email: e, password: p, fullName: n, mobile: m, joined: new Date().toLocaleDateString() });
+  localStorage.setItem('users', JSON.stringify(users));
+  showToast('Registered! Please login.', 'success');
+  showLogin();
+}
+
+function resetPassword() {
+  const e = document.getElementById('resetEmail').value.trim();
+  const p = document.getElementById('resetNewPassword').value.trim();
+  if(!e || !p) return showToast('Fill all fields', 'error');
+
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+  const idx = users.findIndex(x => x.email === e);
+  if(idx === -1) return showToast('User not found', 'error');
+
+  users[idx].password = p;
+  localStorage.setItem('users', JSON.stringify(users));
+  showToast('Password updated', 'success');
+  showLogin();
+}
+
+function logout() {
+  currentUser = null;
+  showHome();
+  showToast('Logged out', 'success');
+}
+
+function enterUserDashboard(user) {
+  hideAllSections();
+  document.getElementById('userDashboard').classList.remove('hidden');
+  document.getElementById('authLinks').classList.add('hidden');
+  document.getElementById('userLinks').classList.remove('hidden');
+  document.getElementById('navUsername').textContent = user.fullName || user.email;
+  
+  showUserProfile(user);
+  loadUserOrders();
+  showUserSection('bookingSec');
+}
+
+function enterAdminDashboard() {
+  hideAllSections();
+  document.getElementById('adminDashboard').classList.remove('hidden');
+  document.getElementById('authLinks').classList.add('hidden');
+  document.getElementById('userLinks').classList.remove('hidden');
+  document.getElementById('navUsername').textContent = 'Admin';
+  document.getElementById('adminFabWrap').classList.remove('hidden');
+  
+  loadAdminOverview();
+  loadAllShipments(); 
+  loadSpecificOrders('standard'); 
+  loadSpecificOrders('express');
+  loadDeliveredOrders(); 
+  loadUsersAdmin();
+  adminShowSection('overview');
+}
+
+/* --- USER LOGIC --- */
+function showUserSection(id) {
+  ['bookingSec','ordersSec','profileSec'].forEach(s => document.getElementById(s).classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+}
+
+function showUserProfile(user) {
+  document.getElementById('profileEmail').textContent = user.email;
+  document.getElementById('profileFullName').textContent = user.fullName || '-';
+  document.getElementById('profileMobile').textContent = user.mobile || '-';
+  document.getElementById('profileDate').textContent = user.joined;
+  document.getElementById('editFullName').value = user.fullName || '';
+  document.getElementById('editMobile').value = user.mobile || '';
+  document.getElementById('editPassword').value = '';
+}
+
+function updateProfile() {
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+  const idx = users.findIndex(u => u.email === currentUser);
+  if(idx === -1) return;
+
+  users[idx].fullName = document.getElementById('editFullName').value.trim();
+  users[idx].mobile = document.getElementById('editMobile').value.trim();
+  const newPass = document.getElementById('editPassword').value.trim();
+  if(newPass) users[idx].password = newPass;
+
+  localStorage.setItem('users', JSON.stringify(users));
+  showToast('Profile updated', 'success');
+  showUserProfile(users[idx]);
+  document.getElementById('navUsername').textContent = users[idx].fullName || users[idx].email;
+}
+
+/* --- COURIER LOGIC --- */
+function calculatePriceAndEta() {
+  const w = parseFloat(document.getElementById('weight').value);
+  const cat = document.getElementById('category').value;
+  const frag = document.getElementById('fragileChk').checked;
+  const expr = document.getElementById('expressChk').checked;
+
+  let price = 0;
+  if (!isNaN(w)) {
+    if (w <= 5) price = 150;
+    else if (w <= 10) price = 300;
+    else if (w <= 15) price = 450;
+    else if (w <= 20) price = 600;
+    // Logic: Prices defined only up to 20kg. 
+    // The input max attribute prevents > 20, but JS logic implicitly handles >20 as 0 or you could add specific logic.
+    // Current logic sets price to 0 if > 20 as no condition matches.
+  }
+
+  if (cat === 'Parcel') price += 50;
+  if (cat === 'Heavy Goods') price += 120;
+  if (frag) price += 50;
+  if (expr) price += 100;
+
+  if (price > 0) {
+    document.getElementById('payment').value = '₹' + price;
+    let days = expr ? 2 : (cat === 'Documents' ? 3 : 4);
+    const d = new Date();
+    d.setDate(d.getDate() + days);
+    document.getElementById('etaField').value = d.toLocaleDateString();
+  } else {
+    document.getElementById('payment').value = '';
+    document.getElementById('etaField').value = '';
+  }
+}
+
+function submitCourierForm() {
+  const sender = document.getElementById('senderName').value.trim();
+  const senderMob = document.getElementById('senderMobile').value.trim();
+  const fromAddr = document.getElementById('fromAddress').value.trim();
+  const receiver = document.getElementById('receiverName').value.trim();
+  const receiverMob = document.getElementById('receiverMobile').value.trim();
+  const toAddr = document.getElementById('toAddress').value.trim();
+  const weight = parseFloat(document.getElementById('weight').value);
+  const cat = document.getElementById('category').value;
+  const payAmt = document.getElementById('payment').value;
+  const method = document.getElementById('paymentMethod').value;
+  const eta = document.getElementById('etaField').value;
+
+  if(!sender || !senderMob || !receiver || !receiverMob || !fromAddr || !toAddr || !weight || !cat || !method) {
+    return showToast('Please fill all fields', 'error');
+  }
+  
+  // Validation: Weight Limit
+  if(weight > 20){
+     return showToast('Maximum weight limit is 20kg', 'error');
+  }
+
+  if(payAmt === '') return showToast('Invalid weight', 'error');
+
+  courierData = {
+    sender, senderMobile: senderMob, fromAddress: fromAddr,
+    receiver, receiverMobile: receiverMob, toAddress: toAddr,
+    weight, category: cat, paymentAmount: payAmt,
+    paymentMethod: method, eta, user: currentUser, 
+    status: 'Pending', fragile: document.getElementById('fragileChk').checked,
+    express: document.getElementById('expressChk').checked
+  };
+
+  if(method !== 'Cash on Delivery') {
+    document.getElementById('courierForm').classList.add('hidden');
+    document.getElementById('paymentSection').classList.remove('hidden');
+    document.getElementById('amountText').textContent = payAmt;
+    document.getElementById('paymentInput').value = '';
+  } else {
+    finalizeCourier();
+  }
+}
+
+function completePayment() {
+  const details = document.getElementById('paymentInput').value.trim();
+  if(!details) return showToast('Enter payment details', 'error');
+  courierData.paymentDetails = details;
+  finalizeCourier();
+}
+
+function finalizeCourier() {
+  const code = (courierData.sender.slice(0,2) + courierData.receiver.slice(0,2) + '-' + Math.floor(1000+Math.random()*9000)).toUpperCase();
+  courierData.code = code;
+  courierData.date = new Date().toLocaleDateString();
+  
+  const couriers = JSON.parse(localStorage.getItem('couriers')) || [];
+  couriers.push(courierData);
+  localStorage.setItem('couriers', JSON.stringify(couriers));
+
+  document.getElementById('courierCode').textContent = `Booking Successful! Code: ${code}`;
+  showToast('Courier booked!', 'success');
+  
+  document.getElementById('courierForm').reset();
+  document.getElementById('courierForm').classList.remove('hidden');
+  document.getElementById('paymentSection').classList.add('hidden');
+  calculatePriceAndEta();
+  loadUserOrders();
+}
+
+function loadUserOrders() {
+  const couriers = JSON.parse(localStorage.getItem('couriers')) || [];
+  const myOrders = couriers.filter(c => c.user === currentUser);
+  const tbody = document.getElementById('userOrdersBody');
+  tbody.innerHTML = '';
+  
+  myOrders.forEach(c => {
+    tbody.innerHTML += `
+      <tr>
+        <td data-label="Code">${c.code}</td>
+        <td data-label="Receiver">${c.receiver}</td>
+        <td data-label="To">${c.toAddress}</td>
+        <td data-label="Status"><span class="status-pill status-${c.status.replace(/ /g,'\\ ')}">${c.status}</span></td>
+        <td data-label="Action"><button class="trackBtn actionBtn" onclick="publicTrackCode('${c.code}')">View</button></td>
+      </tr>
+    `;
+  });
+}
+
+/* --- TRACKING --- */
+function publicTrack() {
+  const code = document.getElementById('publicTrackCode').value.trim();
+  if(!code) return showToast('Enter a code', 'error');
+  publicTrackCode(code);
+}
+
+function publicTrackCode(code) {
+  const couriers = JSON.parse(localStorage.getItem('couriers')) || [];
+  const c = couriers.find(x => x.code === code);
+  
+  if(!c) return showToast('Courier not found', 'error');
+
+  document.getElementById('pStatus').textContent = c.status;
+  document.getElementById('pStatus').className = `status-pill status-${c.status.replace(/ /g,'\\ ')}`;
+  document.getElementById('pFrom').textContent = c.fromAddress;
+  document.getElementById('pTo').textContent = c.toAddress;
+  document.getElementById('pSender').textContent = c.sender;
+  document.getElementById('pEta').textContent = c.eta || '-';
+
+  const res = document.getElementById('publicTrackResult');
+  res.classList.remove('hidden');
+  
+  if(document.getElementById('homePage').classList.contains('hidden')) {
+    showHome();
+    document.getElementById('publicTrackCode').value = code;
+    setTimeout(() => {
+       res.classList.remove('hidden');
+       res.scrollIntoView({behavior:'smooth', block:'center'});
+    }, 100);
+  } else {
+    res.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+}
+
+/* --- ADMIN LOGIC --- */
+function adminShowSection(sec) {
+  document.getElementById('adminOverviewSec').classList.add('hidden');
+  document.getElementById('adminAllSec').classList.add('hidden'); 
+  document.getElementById('adminStandardSec').classList.add('hidden');
+  document.getElementById('adminExpressSec').classList.add('hidden');
+  document.getElementById('adminDeliveredSec').classList.add('hidden');
+  document.getElementById('adminUsersSec').classList.add('hidden');
+  
+  if(sec === 'overview') document.getElementById('adminOverviewSec').classList.remove('hidden');
+  if(sec === 'all') document.getElementById('adminAllSec').classList.remove('hidden'); 
+  if(sec === 'standard') document.getElementById('adminStandardSec').classList.remove('hidden');
+  if(sec === 'express') document.getElementById('adminExpressSec').classList.remove('hidden');
+  if(sec === 'delivered') document.getElementById('adminDeliveredSec').classList.remove('hidden');
+  if(sec === 'users') document.getElementById('adminUsersSec').classList.remove('hidden');
+  
+  document.getElementById('adminPanel').classList.remove('open');
+}
+
+function loadAdminOverview() {
+  const couriers = JSON.parse(localStorage.getItem('couriers')) || [];
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  
+  let totalRevenue = 0;
+  let pendingCount = 0;
+  
+  couriers.forEach(c => {
+    if(c.paymentAmount) {
+      const amount = parseFloat(c.paymentAmount.replace(/[^\d.-]/g, ''));
+      if(!isNaN(amount)) totalRevenue += amount;
+    }
+    if(c.status === 'Pending') pendingCount++;
+  });
+
+  document.getElementById('statTotalOrders').textContent = couriers.length;
+  document.getElementById('statPending').textContent = pendingCount;
+  document.getElementById('statRevenue').textContent = "₹" + totalRevenue.toLocaleString();
+  document.getElementById('statUsers').textContent = users.length;
+
+  const tbody = document.getElementById('recentOrdersTable');
+  tbody.innerHTML = '';
+  const recent = couriers.slice(-5).reverse();
+
+  recent.forEach(c => {
+    tbody.innerHTML += `
+      <tr>
+        <td data-label="Code">${c.code}</td>
+        <td data-label="User">${c.user}</td>
+        <td data-label="Route">${c.fromAddress} → ${c.toAddress}</td>
+        <td data-label="Status"><span class="status-pill status-${c.status.replace(/ /g,'\\ ')}">${c.status}</span></td>
+        <td data-label="Action"><button class="trackBtn actionBtn" onclick="adminTrackView('${c.code}')">View</button></td>
+      </tr>
+    `;
+  });
+}
+
+function loadAllShipments() {
+  const couriers = JSON.parse(localStorage.getItem('couriers')) || [];
+  const searchVal = document.getElementById('filterSearch').value.toLowerCase();
+  const statusVal = document.getElementById('filterStatus').value;
+  const typeVal = document.getElementById('filterType').value;
+
+  let filtered = couriers.filter(c => {
+      const matchSearch = !searchVal || 
+                         c.code.toLowerCase().includes(searchVal) || 
+                         c.sender.toLowerCase().includes(searchVal) || 
+                         c.receiver.toLowerCase().includes(searchVal) ||
+                         c.fromAddress.toLowerCase().includes(searchVal);
+
+      const matchStatus = statusVal === 'ALL' || c.status === statusVal;
+
+      let matchType = true;
+      if(typeVal === 'Express') matchType = c.express;
+      if(typeVal === 'Standard') matchType = !c.express;
+
+      return matchSearch && matchStatus && matchType;
+  });
+
+  const tbody = document.getElementById('allShipmentsTable');
+  tbody.innerHTML = '';
+
+  if(filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--muted); padding:2rem;">No shipments found matching criteria.</td></tr>`;
+    return;
+  }
+
+  filtered.forEach((c) => {
+    const originalIdx = couriers.findIndex(x => x.code === c.code);
+    const typeBadge = c.express ? '<span class="badge express">Express</span>' : '<span class="badge">Standard</span>';
+
+    tbody.innerHTML += `
+      <tr>
+        <td data-label="Code">${c.code}</td>
+        <td data-label="Type">${typeBadge}</td>
+        <td data-label="Sender">${c.sender}</td>
+        <td data-label="Route">${c.fromAddress} → ${c.toAddress}</td>
+        <td data-label="Status"><span class="status-pill status-${c.status.replace(/ /g,'\\ ')}">${c.status}</span></td>
+        <td data-label="Manage">
+          <button class="trackBtn actionBtn" onclick="adminTrackView('${c.code}')">View</button>
+          <button class="deleteBtn actionBtn" onclick="deleteCourier(${originalIdx})">Delete</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+function loadSpecificOrders(type) {
+  const couriers = JSON.parse(localStorage.getItem('couriers')) || [];
+  let filtered = [];
+  let tbodyId = '';
+
+  if(type === 'standard') {
+    filtered = couriers.filter(c => !c.express && c.status !== 'Delivered');
+    tbodyId = 'standardTable';
+  } else if(type === 'express') {
+    filtered = couriers.filter(c => c.express && c.status !== 'Delivered');
+    tbodyId = 'expressTable';
+  }
+
+  const tbody = document.getElementById(tbodyId);
+  tbody.innerHTML = '';
+
+  if(filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--muted); padding:2rem;">No active ${type} orders.</td></tr>`;
+    return;
+  }
+
+  filtered.forEach((c) => {
+    const originalIdx = couriers.findIndex(x => x.code === c.code);
+
+    tbody.innerHTML += `
+      <tr>
+        <td data-label="Code">${c.code}</td>
+        <td data-label="Sender">${c.sender}</td>
+        <td data-label="Route">${c.fromAddress} → ${c.toAddress}</td>
+        <td data-label="Status"><span class="status-pill status-${c.status.replace(/ /g,'\\ ')}">${c.status}</span></td>
+        <td data-label="Manage">
+          <button class="trackBtn actionBtn" onclick="adminTrackView('${c.code}')">View</button>
+          <button class="deleteBtn actionBtn" onclick="deleteCourier(${originalIdx})">Delete</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+function loadDeliveredOrders() {
+  const couriers = JSON.parse(localStorage.getItem('couriers')) || [];
+  const filtered = couriers.filter(c => c.status === 'Delivered');
+  const tbody = document.getElementById('deliveredTable');
+  tbody.innerHTML = '';
+
+  if(filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:var(--muted); padding:2rem;">No delivered orders yet.</td></tr>`;
+    return;
+  }
+
+  filtered.forEach((c) => {
+    const originalIdx = couriers.findIndex(x => x.code === c.code);
+
+    tbody.innerHTML += `
+      <tr>
+        <td data-label="Code">${c.code}</td>
+        <td data-label="Sender">${c.sender}</td>
+        <td data-label="Route">${c.fromAddress} → ${c.toAddress}</td>
+        <td data-label="Details">${c.category} - ${c.weight}kg</td>
+        <td data-label="Manage">
+          <button class="trackBtn actionBtn" onclick="adminTrackView('${c.code}')">View</button>
+          <button class="deleteBtn actionBtn" onclick="deleteCourier(${originalIdx})">Delete</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+function deleteCourier(idx) {
+  if(!confirm('Delete this shipment?')) return;
+  const couriers = JSON.parse(localStorage.getItem('couriers')) || [];
+  couriers.splice(idx, 1);
+  localStorage.setItem('couriers', JSON.stringify(couriers));
+  
+  loadAdminOverview(); 
+  loadAllShipments();
+  loadSpecificOrders('standard');
+  loadSpecificOrders('express');
+  loadDeliveredOrders();
+  showToast('Shipment deleted', 'success');
+}
+
+function adminTrackLookup() {
+  const code = document.getElementById('adminTrackInput').value.trim();
+  if(!code) return;
+  adminTrackView(code);
+}
+
+function adminTrackView(code) {
+  const couriers = JSON.parse(localStorage.getItem('couriers')) || [];
+  const c = couriers.find(x => x.code === code);
+  
+  if(!c) {
+      showToast('Shipment not found', 'error');
+      return;
+  }
+
+  selectedCourierCode = c.code;
+
+  document.getElementById('aStatus').textContent = c.status;
+  document.getElementById('aStatus').className = `status-pill status-${c.status.replace(/ /g,'\\ ')}`;
+  document.getElementById('aCode').textContent = c.code;
+  document.getElementById('aUser').textContent = c.user;
+  
+  document.getElementById('aSenderName').textContent = c.sender;
+  document.getElementById('aSenderMobile').textContent = c.senderMobile;
+  document.getElementById('aFrom').textContent = c.fromAddress;
+  
+  document.getElementById('aReceiverName').textContent = c.receiver;
+  document.getElementById('aReceiverMobile').textContent = c.receiverMobile;
+  document.getElementById('aTo').textContent = c.toAddress;
+  
+  document.getElementById('aWeight').textContent = c.weight + ' kg';
+  document.getElementById('aCategory').textContent = c.category;
+  document.getElementById('aEta').textContent = c.eta || 'N/A';
+  document.getElementById('aPayment').textContent = `${c.paymentAmount} (${c.paymentMethod})`;
+  
+  let optionsHtml = '';
+  if(c.fragile) optionsHtml += '<span class="badge fragile">Fragile</span>';
+  if(c.express) optionsHtml += '<span class="badge express">Express</span>';
+  if(!c.fragile && !c.express) optionsHtml = 'Standard';
+  document.getElementById('aOptions').innerHTML = optionsHtml;
+
+  document.getElementById('adminUpdateStatusSelect').value = c.status;
+
+  const res = document.getElementById('adminTrackResult');
+  res.classList.remove('hidden');
+  res.scrollIntoView({behavior:'smooth'});
+}
+
+function adminUpdateStatus() {
+  if(!selectedCourierCode) return;
+  
+  const newStatus = document.getElementById('adminUpdateStatusSelect').value;
+  const couriers = JSON.parse(localStorage.getItem('couriers')) || [];
+  const idx = couriers.findIndex(x => x.code === selectedCourierCode);
+  
+  if(idx !== -1) {
+    couriers[idx].status = newStatus;
+    localStorage.setItem('couriers', JSON.stringify(couriers));
+    showToast('Status updated to ' + newStatus, 'success');
+    
+    loadAdminOverview(); 
+    loadAllShipments(); 
+    loadSpecificOrders('standard');
+    loadSpecificOrders('express');
+    loadDeliveredOrders();
+    
+    document.getElementById('aStatus').textContent = newStatus;
+    document.getElementById('aStatus').className = `status-pill status-${newStatus.replace(/ /g,'\\ ')}`;
+  }
+}
+
+function loadUsersAdmin() {
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const tbody = document.getElementById('usersTable');
+  tbody.innerHTML = '';
+  users.forEach(u => {
+    tbody.innerHTML += `<tr>
+      <td data-label="Email">${u.email}</td>
+      <td data-label="Name">${u.fullName||'-'}</td>
+      <td data-label="Mobile">${u.mobile||'-'}</td>
+      <td data-label="Joined">${u.joined}</td>
+    </tr>`;
+  });
+}
+
+/* --- UTILS --- */
+function initTheme() {
+  const saved = localStorage.getItem('theme');
+  const btn = document.getElementById('themeToggle');
+  if(saved === 'dark') document.body.classList.add('dark');
+  
+  btn.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+  });
+}
+
+function showToast(msg, type = 'success') {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `<span>${msg}</span> <button class="close-toast" onclick="this.parentElement.remove()">✕</button>`;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(10px)';
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+</script>
+</body>
+</html>
